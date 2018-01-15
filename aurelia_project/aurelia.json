@@ -15,10 +15,11 @@
   "platform": {
     "id": "web",
     "displayName": "Web",
-    "port": 8080,
+    "port": 8083,
     "hmr": false,
     "open": false,
-    "output": "dist"
+    "output": "dist",
+    "public": "localhost"
   },
   "loader": {
     "id": "none",
@@ -48,12 +49,10 @@
     "id": "none",
     "displayName": "None"
   },
-  "unitTestRunner": [
-    {
-      "id": "karma",
-      "displayName": "Karma"
-    }
-  ],
+  "unitTestRunner": [{
+    "id": "karma",
+    "displayName": "Karma"
+  }],
   "integrationTestRunner": {
     "id": "protractor",
     "displayName": "Protractor"

@@ -11,6 +11,7 @@ function runWebpack(done) {
   // https://webpack.github.io/docs/webpack-dev-server.html
   let opts = {
     host: 'localhost',
+    public: project.platform.public || 'localhost',
     publicPath: config.output.publicPath,
     filename: config.output.filename,
     hot: project.platform.hmr || CLIOptions.hasFlag('hmr'),
