@@ -1,0 +1,20 @@
+{
+  eventType: "newType",
+  data: {
+    name: "Tasks",
+    elements: [
+      { name: "description", type: "string" },
+      { name: "done", type: "boolean" }
+    ]
+  }
+}, {
+  eventType: "newCollection",
+  data: {
+    name: "Tasks",
+    type: "Tasks",
+    organization: "simple-cluster-strategy",
+    replicate: "lazy-replication-strategy",
+    network: "private"
+  },
+  target: "collections"
+},
