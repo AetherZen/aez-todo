@@ -1,16 +1,26 @@
 {
   eventType: "newType",
   data: {
-    name: "Tasks",
+    name: "Task",
     elements: [
+      { name: "name", type: "string" },
       { name: "description", type: "string" },
       { name: "done", type: "boolean" }
     ]
   }
 }, {
-  eventType: "newCollection",
+  eventType: "newType",
   data: {
     name: "Tasks",
+    elements: [
+      { name: "type", type: "string" },
+      { name: "children", type: "array.Task" }
+    ]
+  }
+}, {
+  eventType: "newCollection",
+  data: {
+    name: "tasks",
     type: "Tasks",
     organization: "simple-cluster-strategy",
     replicate: "lazy-replication-strategy",
