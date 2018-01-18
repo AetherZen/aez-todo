@@ -3,7 +3,15 @@
   data: {
     name: "Task",
     elements: [
-      { name: "name", type: "string" },
+      { name: "description", type: "string" },
+      { name: "done", type: "boolean" }
+    ]
+  }
+}, {
+  eventType: "newType",
+  data: {
+    name: "newTask",
+    elements: [
       { name: "description", type: "string" },
       { name: "done", type: "boolean" }
     ]
@@ -15,7 +23,16 @@
     elements: [
       { name: "type", type: "string" },
       { name: "children", type: "array.Task" }
-    ]
+    ],
+    actions: [{
+      name: 'Add',
+      operator: 'newTask',
+      eventType: 'newTask',
+    }, {
+      name: 'Delete',
+      operator: 'deleteChild',
+      preConditions: ['childSelected']
+    }]
   }
 }, {
   eventType: "newCollection",
@@ -25,6 +42,5 @@
     organization: "simple-cluster-strategy",
     replicate: "lazy-replication-strategy",
     network: "private"
-  },
-  target: "collections"
+  }
 },
