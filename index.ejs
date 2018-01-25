@@ -8,9 +8,10 @@
     <!-- imported CSS are concatenated and added automatically -->
   </head>
   <body aurelia-app="main">
-    <% if (htmlWebpackPlugin.options.metadata.server) { %>
+    <!--<% if (htmlWebpackPlugin.options.metadata.server) { %>-->
     <!-- Webpack Dev Server reload -->
-    <script src="/webpack-dev-server.js"></script>
-    <% } %>
+    <!--<script src="/webpack-dev-server.js"></script>-->
+    <!--<% } %>-->
+    <script type="text/javascript" src="/libAethOS<%- htmlWebpackPlugin.options.metadata.vendorBundleName %>"></script>
   </body>
 </html>

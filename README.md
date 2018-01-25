@@ -5,8 +5,9 @@ This is a sample application taken from Aurelia documentation and modified to wo
 
 ## Installation
 
-Requires aethos-spaces.  Install that according to its README and then link it here.
+Requires `aethos-client-core` and `aethos-spaces`.  Install them according to the README files in those projects and then link it here.
 ```
+npm link aethos-client-core
 npm link aethos-spaces
 ```
 
@@ -32,3 +33,6 @@ This will run in a development environment on port 8083.  Any changes you make w
 ```
 au run --watch
 ```
+
+
+*Note: I have had problems with `--watch`.  If you experience problems with webpack going into an infinite loop, just use `au run` and then `ctrl-c` and restart when you make modifications.  This is **really** inconvenient so I'll try to see what I can do to solve this ASAP.*

@@ -1,13 +1,13 @@
 import { inject } from 'aurelia-framework';
-import { ZenSpaces, CollectionRegistry, OperatorRegistry, Operator } from 'aethos-spaces';
+import { ZenSpaces, Operator } from 'aethos-spaces';
 import { Todo } from './todo';
 
-@inject(ZenSpaces, CollectionRegistry, OperatorRegistry)
+@inject(ZenSpaces)
 export class App {
-  constructor(spaces, collectionReistry, operatorRegistry) {
+  constructor(spaces) {
     this.spaces = spaces;
-    this.collectionRegistry = collectionReistry;
-    this.operatorRegistry = operatorRegistry;
+    this.collectionRegistry = spaces.collectionRegistry;
+    this.operatorRegistry = spaces.operatorRegistry;
 
     this.heading = "Tasks";
     this.list = [];

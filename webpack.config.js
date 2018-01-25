@@ -4,7 +4,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const project = require('./aurelia_project/aurelia.json');
 const { AureliaPlugin, ModuleDependenciesPlugin } = require('aurelia-webpack-plugin');
-const { optimize: { CommonsChunkPlugin }, ProvidePlugin } = require('webpack');
+const { optimize: { CommonsChunkPlugin }, ProvidePlugin, DllReferencePlugin } = require('webpack');
+
+const express = require("express");
 
 // config helpers:
 const ensureArray = (config) => config && (Array.isArray(config) ? config : [config]) || [];
@@ -16,7 +18,17 @@ const title = 'AethOS TODO';
 const outDir = path.resolve(__dirname, project.platform.output);
 const srcDir = path.resolve(__dirname, 'src');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
-const baseUrl = '/';
+const baseUrl = '/apps/todo/';
+
+const vendorManifest = require('./node_modules/aethos-client-core/dist/vendor-manifest.json');
+
+console.log(`Vendor manifest name: ${vendorManifest.name}`);
+
+const vendorBundleName = `/${vendorManifest.name.replace('_', '.')}.bundle.js`;
+
+const dllReference = new DllReferencePlugin({
+  manifest: vendorManifest
+});
 
 const cssRules = [
   { loader: 'css-loader' },
@@ -43,7 +55,8 @@ module.exports = ({ production, server, extractCss, coverage } = {}) => ({
     // serve index.html for all 404 (required for push-state)
     historyApiFallback: true
   },
-  devtool: production ? 'nosources-source-map' : 'cheap-module-eval-source-map',
+  // devtool: production ? 'nosources-source-map' : 'cheap-module-eval-source-map',
+  devtool: 'inline-source-map',
   module: {
     rules: [
       // CSS required in JS/TS files should use the style-loader that auto-injects it into the website
@@ -92,6 +105,7 @@ module.exports = ({ production, server, extractCss, coverage } = {}) => ({
     ]
   },
   plugins: [
+    dllReference,
     new AureliaPlugin(),
     new ProvidePlugin({
       'Promise': 'bluebird'
@@ -117,7 +131,8 @@ module.exports = ({ production, server, extractCss, coverage } = {}) => ({
         // available in index.ejs //
         title,
         server,
-        baseUrl
+        baseUrl,
+        vendorBundleName
       }
     }),
     ...when(extractCss, new ExtractTextPlugin({

@@ -26,7 +26,5 @@ export function configure(aurelia) {
     aurelia.use.plugin(PLATFORM.moduleName('aurelia-testing'));
   }
 
-  aurelia.use.plugin(PLATFORM.moduleName('aethos-spaces'));
-
   aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
 }
