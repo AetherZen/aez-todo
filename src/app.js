@@ -32,7 +32,7 @@ export class App {
     };
     // bind to this.list (would be nice to have a parameter to allow binding to this.tasks or something other than
     // always defaulting to model.list)
-    this.binding = this.collectionRegistry.bind(this, this.collectionName);
+    this.binding = this.collectionRegistry.bind(this, this.collectionName, 'description done');
   }
 
   deactivate() {
@@ -45,8 +45,9 @@ export class App {
     // Validate; should probabl use something more Aurelia-like
     if (this.todoDescription) {
       // Get the appropriate action and call it.
-      this.actions.get('newTask').execute();
-      this.todoDescription = '';
+      this.actions.get('newTask').execute().then(() => {
+        this.todoDescription = '';
+      });
     }
   }
 
@@ -63,7 +64,7 @@ class NewTaskOperator extends Operator {
   execute() {
     console.log('New Task');
     console.log(this.viewModel);
-    this.getEventType().then((eventFactory) => {
+    return this.getEventType().then((eventFactory) => {
       let newEvent = eventFactory.create();
       // TODO Would be nice to have this binding automatically occur.
       newEvent.description = this.viewModel.todoDescription;
