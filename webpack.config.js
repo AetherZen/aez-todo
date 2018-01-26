@@ -105,7 +105,8 @@ module.exports = ({ production, server, extractCss, coverage } = {}) => ({
     ]
   },
   plugins: [
-    dllReference,
+    // Temporarily remove dllReference; maybe it should only be used in production?
+    // dllReference,
     new AureliaPlugin(),
     new ProvidePlugin({
       'Promise': 'bluebird'

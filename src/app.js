@@ -30,7 +30,8 @@ export class App {
     this.model = {
       name: this.collectionName
     };
-    // bind to this.list
+    // bind to this.list (would be nice to have a parameter to allow binding to this.tasks or something other than
+    // always defaulting to model.list)
     this.binding = this.collectionRegistry.bind(this, this.collectionName);
   }
 
@@ -41,33 +42,33 @@ export class App {
   }
 
   addTodo() {
-    // TODO Get the appropriate action and call it.
-    console.log(this.actions);
+    // Validate; should probabl use something more Aurelia-like
     if (this.todoDescription) {
-      // this.todos.push(new Todo(this.todoDescription));
-      // this.todoDescription = '';
+      // Get the appropriate action and call it.
+      this.actions.get('newTask').execute();
+      this.todoDescription = '';
     }
   }
 
   removeTodo(todo) {
-    // let index = this.todos.indexOf(todo);
-    // if (index !== -1) {
-    //   this.todos.splice(index, 1);
-    // }
+    // TODO Implement using a Zen Spaces operator
   }
 }
 
 class NewTaskOperator extends Operator {
-  constructor() {
-    super(...arguments);
+  constructor(...args) {
+    super(...args);
   }
 
   execute() {
     console.log('New Task');
+    console.log(this.viewModel);
     this.getEventType().then((eventFactory) => {
-      this.newEvent = eventFactory.create();
-      this.newEvent.
-      this.spaces.createEvent(event);
+      let newEvent = eventFactory.create();
+      // TODO Would be nice to have this binding automatically occur.
+      newEvent.description = this.viewModel.todoDescription;
+      newEvent.done = false;
+      this.spaces.createEvent(newEvent);
     })
   }
 }

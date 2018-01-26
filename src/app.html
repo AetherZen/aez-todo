@@ -6,7 +6,7 @@
   </form>
   
   <ul>
-    <li repeat.for="todo of todos">
+    <li repeat.for="todo of list">
       <input type="checkbox" checked.bind="todo.done">
       <span css="text-decoration: ${todo.done ? 'line-through' : 'none'}">
         ${todo.description}

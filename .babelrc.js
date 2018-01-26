@@ -12,8 +12,7 @@ module.exports = () => {
             "node": process.env.IN_PROTRACTOR ? '6' : 'current'
           } : {
             "browsers": [
-              "last 2 versions",
-              "not ie <= 11"
+              "chrome 64"
             ],
             "uglify": process.env.NODE_ENV === 'production',
           },

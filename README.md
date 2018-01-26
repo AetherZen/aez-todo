@@ -6,6 +6,8 @@ This is a sample application taken from Aurelia documentation and modified to wo
 ## Installation
 
 Requires `aethos-client-core` and `aethos-spaces`.  Install them according to the README files in those projects and then link it here.
+
+(note, I've temporarily removed the dependency on aethos-client-core; that dependency should only exist in production, not in a development environment but that requires a little more work)
 ```
 npm link aethos-client-core
 npm link aethos-spaces

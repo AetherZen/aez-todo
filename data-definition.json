@@ -3,6 +3,7 @@
   data: {
     name: "Task",
     elements: [
+      { name: "name", type: "string" },
       { name: "description", type: "string" },
       { name: "done", type: "boolean" }
     ]
@@ -28,10 +29,6 @@
       name: 'Add',
       operator: 'newTask',
       eventType: 'newTask',
-    }, {
-      name: 'Delete',
-      operator: 'deleteChild',
-      preConditions: ['childSelected']
     }]
   }
 }, {
