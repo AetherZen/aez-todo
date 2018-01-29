@@ -23,16 +23,13 @@ export class App {
     this.collectionName = 'tasks';
 
     this.operatorRegistry.register('newTask', NewTaskOperator);
+    this.operatorRegistry.register('deleteTask', DeleteTaskOperator);
   }
 
   activate(params, routeConfig) {
-    // Configure the model
-    this.model = {
-      name: this.collectionName
-    };
     // bind to this.list (would be nice to have a parameter to allow binding to this.tasks or something other than
     // always defaulting to model.list)
-    this.binding = this.collectionRegistry.bind(this, this.collectionName, 'description done');
+    this.binding = this.collectionRegistry.bind(this, this.collectionName, 'name description done');
   }
 
   deactivate() {
@@ -52,7 +49,7 @@ export class App {
   }
 
   removeTodo(todo) {
-    // TODO Implement using a Zen Spaces operator
+    return this.actions.get('deleteTask').execute(todo);
   }
 }
 
@@ -70,6 +67,21 @@ class NewTaskOperator extends Operator {
       newEvent.description = this.viewModel.todoDescription;
       newEvent.done = false;
       this.spaces.createEvent(newEvent);
+    })
+  }
+}
+
+class DeleteTaskOperator extends Operator {
+  constructor(...args) {
+    super(...args);
+  }
+
+  execute(task) {
+    console.log('Delete Task');
+    console.log(this.viewModel);
+    return this.getEventType().then((eventFactory) => {
+      let deleteEvent = eventFactory.create(task);
+      this.spaces.createEvent(deleteEvent);
     })
   }
 }

@@ -20,6 +20,14 @@
 }, {
   eventType: "newType",
   data: {
+    name: "deleteTask",
+    elements: [
+      { name: "name", type: "string" }
+    ]
+  }
+}, {
+  eventType: "newType",
+  data: {
     name: "Tasks",
     elements: [
       { name: "type", type: "string" },
@@ -28,7 +36,11 @@
     actions: [{
       name: 'Add',
       operator: 'newTask',
-      eventType: 'newTask',
+      eventType: 'newTask'
+    }, {
+      name: 'Delete',
+      operator: 'deleteTask',
+      eventType: 'deleteTask'
     }]
   }
 }, {
