@@ -1,11 +1,11 @@
-import {config} from './build';
+import { config } from './build';
 import configureEnvironment from './environment';
 import webpack from 'webpack';
 import Server from 'webpack-dev-server';
 import project from '../aurelia.json';
-import {CLIOptions, reportWebpackReadiness} from 'aurelia-cli';
+import { CLIOptions, reportWebpackReadiness } from 'aurelia-cli';
 import gulp from 'gulp';
-import {buildWebpack} from './build';
+import { buildWebpack } from './build';
 
 function runWebpack(done) {
   // https://webpack.github.io/docs/webpack-dev-server.html
@@ -44,7 +44,8 @@ function runWebpack(done) {
         reportWebpackReadiness(opts);
         done();
       });
-    } else {
+    }
+    else {
       reportWebpackReadiness(opts);
       done();
     }
